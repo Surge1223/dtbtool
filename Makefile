@@ -55,7 +55,11 @@ libs: $(STATIC_LIBS)
 	for file in $(STATIC_LIBS) ; do \
 			mv $$file $(LIBDIR)/; done
 
-install: $(TARGETS)
+testbin := $(shell test -d $(BINDIR) || mkdir -p $(BINDIR))
+
+testlib := $(shell test -d $(LIBDIR) || mkdir -p $(LIBDIR))
+
+install: $(testbin) $(testlib) $(TARGETS)
 	for file in `find ./ -name "$(TARGETS)" `; do \
 			mv $$file $(BINDIR)/; done
 
